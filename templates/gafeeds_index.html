@@ -1,0 +1,44 @@
+<{* $Id: gafeeds_index.html,v 1.1 2007/06/28 16:41:50 ohwada Exp $ *}>
+<{* http://code.google.com/apis/ajaxfeeds/ *}>
+
+<script type="text/javascript" src="http://www.google.com/jsapi?key=<{$ga_api_key}>"></script>
+<script language="Javascript" type="text/javascript">
+//<![CDATA[
+
+function gafeeds_initialize() {
+	var gafeeds_feed_control = new google.feeds.FeedControl();
+<{if $ga_url_1 && $ga_label_1 }>
+	gafeeds_feed_control.addFeed( "<{$ga_url_1}>", "<{$ga_label_1}>" );
+<{/if}>
+<{if $ga_url_2 && $ga_label_2 }>
+	gafeeds_feed_control.addFeed( "<{$ga_url_2}>", "<{$ga_label_2}>" );
+<{/if}>
+<{if $ga_url_3 && $ga_label_3 }>
+	gafeeds_feed_control.addFeed( "<{$ga_url_3}>", "<{$ga_label_3}>" );
+<{/if}>
+<{if $ga_draw_mode == "tabbed" }>
+	gafeeds_feed_control.draw( document.getElementById("gafeeds_result"),
+		{ drawMode : google.feeds.FeedControl.DRAW_MODE_TABBED }
+	);
+<{else}>
+	gafeeds_feed_control.draw( document.getElementById("gafeeds_result") );
+<{/if}>
+}
+
+google.load("feeds", "1");
+window.onload = gafeeds_initialize;
+
+//]]>
+</script>
+
+<h3 align='center'><{$module_name}></h3>
+<a href="index.php">[<{$lang_feeds}>]</a> 
+<a href="slide_show.php">[<{$lang_slide_show}>]</a>
+<h4><{$lang_feeds}></h4>
+
+<div id="gafeeds_result">Loading ...</div>
+
+<{if $is_module_admin }>
+	<br /><hr />
+	<a href="./admin/">go to admin cp</a>
+<{/if}>

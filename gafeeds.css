@@ -1,0 +1,15 @@
+/* $Id: gafeeds.css,v 1.2 2007/07/19 16:16:45 ohwada Exp $ */
+
+.gafeeds_gss 
+{
+	width: 640px;
+	height: 480px;
+	color: #dddddd;
+	background-color: #000000;
+	padding: 8px;
+}
+
+.gafeeds_gss a img 
+{
+	border : none;
+}

@@ -1,0 +1,51 @@
+<{* $Id: gafeeds_slide_show.html,v 1.3 2007/07/20 11:36:15 ohwada Exp $ *}>
+<{* http://code.google.com/apis/ajaxfeeds/ *}>
+
+<link href="<{$xoops_url}>/modules/gafeeds/gafeeds.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="http://www.google.com/jsapi?key=<{$ga_api_key}>"></script>
+<script src="http://www.google.com/uds/solutions/slideshow/gfslideshow.js" type="text/javascript"></script>
+<script language="Javascript" type="text/javascript">
+//<![CDATA[
+
+function gafeeds_load_slide_show() 
+{
+	var gafeeds_ss_feed = "<{$ga_ss_url}>";
+	var gafeeds_ss_options = {
+		numResults : <{$ga_ss_num_results}>, 
+		displayTime : <{$ga_ss_display_time}>, 
+		transitionTime : <{$ga_ss_transition_time}>, 
+<{if $ga_ss_link_target }>
+		linkTarget : google.feeds.LINK_TARGET_BLANK, 
+<{/if}>
+<{if $ga_ss_thumbnail_size == 'small' }>
+		thumbnailSize : GFslideShow.THUMBNAILS_SMALL, 
+<{elseif $ga_ss_thumbnail_size == 'medium' }>
+		thumbnailSize : GFslideShow.THUMBNAILS_MEDIUM, 
+<{else}>
+		thumbnailSize : GFslideShow.THUMBNAILS_LARGE, 
+<{/if}>
+		scaleImages : <{$ga_ss_scale_images}> 
+	};
+	var gafeeds_ss_ss = new GFslideShow(gafeeds_ss_feed, "gafeeds_ss_result", gafeeds_ss_options );
+}
+
+google.load("feeds", "1");
+window.onload = gafeeds_load_slide_show;
+
+//]]>
+</script>
+
+<h3 align='center'><{$module_name}></h3>
+<a href="index.php">[<{$lang_feeds}>]</a> 
+<a href="slide_show.php">[<{$lang_slide_show}>]</a>
+<h4><{$lang_slide_show}></h4>
+
+<a href="<{$ga_ss_url_s}>" target="_blank" ><img src="./images/rss.png" alt="<{$ss_title_s}>"></a> 
+<b><{$ss_title_s}></b> <br /><br />
+
+<div id="gafeeds_ss_result" class="gafeeds_gss">Loading ...</div>
+
+<{if $is_module_admin }>
+	<br /><hr />
+	<a href="./admin/">go to admin cp</a>
+<{/if}>
